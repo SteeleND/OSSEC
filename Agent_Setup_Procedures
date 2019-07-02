@@ -1,0 +1,95 @@
+OSSEC Agent setup-
+Before you add an agent, you need to be in the host, and add a new agent, to do this, run the following commands: 
+sudo var/ossec/bin/manage_agents
+Select A for add new agent.
+Select a name for the new Agent
+Add the IP of the host when prompted
+Select an ID number for the agent, or hit enter for the next chronological number
+Y to confirm adding the Agent.
+Then use the E command to Extract the Key for the new Agent
+This will prompt you for the ID number you selected above.
+Save this key for the next step. 
+On the new agent, you will then: 
+Update and install dependencies and webserver
+sudo apt-get update -y
+sudo apt-get install apache2 -y
+sudo apt-get install build-essential -y
+sudo apt-get update -y
+sudo apt install zlib1g-dev 
+Pull the tar, install the client using: 
+wget https://github.com/ossec/ossec-hids/archive/3.3.0.tar.gz
+sudo tar -zxvf 3.3.0.tar.gz
+cd ossec-hids-3.3.0/src/external
+sudo wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
+sudo tar -zxvf pcre2-10.32.tar.gz
+cd ../.. 
+Run the install script
+sudo ./install.sh
+-en
+
+Enter to continue
+agent
+<ip of host> This can either be a single IP address (e.g. 192.168.1.25), a range of IPs (e.g. 192.168.2.0/24)
+Y for integrity check daemon
+Y for rootkit detection engine
+Y for enable active response
+Enter to continue 
+Once it finishes, you need to add the agent to the host:
+sudo /var/ossec/bin/manage_agents start 
+select I for import key from the server
+Paste the exported key from the host and confirm. 
+Now start the OSSEC Agent:
+sudo var/ossec/bin/ossec-control start 
+
+You will then need to go back to the host, and run the following command to restart the ossec manager, to recognize the new agent, it will now be shown on the GUI:
+sudo var/ossec/bin/ossec-control restart 
+ossec-control is the ossec client, theres a lot of useful commands for restarting it, and refreshing it.
+For any ossec-control commands, use the documentation at:
+https://ossec-docs.readthedocs.io/en/latest/programs/ossec-control.htmlOSSEC Agent setup-
+Before you add an agent, you need to be in the host, and add a new agent, to do this, run the following commands: 
+sudo var/ossec/bin/manage_agents
+Select A for add new agent.
+Select a name for the new Agent
+Add the IP of the host when prompted
+Select an ID number for the agent, or hit enter for the next chronological number
+Y to confirm adding the Agent.
+Then use the E command to Extract the Key for the new Agent
+This will prompt you for the ID number you selected above.
+Save this key for the next step. 
+On the new agent, you will then: 
+Update and install dependencies and webserver
+sudo apt-get update -y
+sudo apt-get install apache2 -y
+sudo apt-get install build-essential -y
+sudo apt-get update -y
+sudo apt install zlib1g-dev 
+Pull the tar, install the client using: 
+wget https://github.com/ossec/ossec-hids/archive/3.3.0.tar.gz
+sudo tar -zxvf 3.3.0.tar.gz
+cd ossec-hids-3.3.0/src/external
+sudo wget https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
+sudo tar -zxvf pcre2-10.32.tar.gz
+cd ../.. 
+Run the install script
+sudo ./install.sh
+-en
+
+Enter to continue
+agent
+<ip of host> This can either be a single IP address (e.g. 192.168.1.25), a range of IPs (e.g. 192.168.2.0/24)
+Y for integrity check daemon
+Y for rootkit detection engine
+Y for enable active response
+Enter to continue 
+Once it finishes, you need to add the agent to the host:
+sudo /var/ossec/bin/manage_agents start 
+select I for import key from the server
+Paste the exported key from the host and confirm. 
+Now start the OSSEC Agent:
+sudo var/ossec/bin/ossec-control start 
+
+You will then need to go back to the host, and run the following command to restart the ossec manager, to recognize the new agent, it will now be shown on the GUI:
+sudo var/ossec/bin/ossec-control restart 
+ossec-control is the ossec client, theres a lot of useful commands for restarting it, and refreshing it.
+For any ossec-control commands, use the documentation at:
+https://ossec-docs.readthedocs.io/en/latest/programs/ossec-control.html
